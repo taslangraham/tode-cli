@@ -30,12 +30,12 @@ export default class Controller extends Command {
     description: 'Name of controller to create',
     required: true,
   },
-  // For future development
-  {
-    name: 'path',
-    description: 'URL path that controller will be accessed at',
-    required: false,
-  },
+    // For future development
+    // {
+    //   name: 'path',
+    //   description: 'URL path that controller will be accessed at',
+    //   required: false,
+    // },
   ];
 
   public static examples = ['tode add:controller <controller_name>'];
