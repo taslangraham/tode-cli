@@ -1,0 +1,39 @@
+{
+    "extends": "tslint:recommended",
+    "rules": {
+        "max-line-length": {
+            "options": [
+                120
+            ]
+        },
+        "new-parens": true,
+        "no-bitwise": true,
+        "no-console": {
+            "severity": "warning",
+            "options": [
+                "debug",
+                "info",
+                "log",
+                "time",
+                "timeEnd",
+                "trace"
+            ]
+        },
+        "semicolon": [
+            true,
+            "always"
+        ],
+        "quotemark": false,
+        "member-access": true,
+        "object-literal-sort-keys": false,
+        "comment-format": false,
+        "interface-name": false
+    },
+    "jsRules": {
+        "max-line-length": {
+            "options": [
+                120
+            ]
+        }
+    }
+}

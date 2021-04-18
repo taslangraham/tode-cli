@@ -1,0 +1,9 @@
+{
+    "sourceDir": "template/controller",
+    "destination": "src/controllers",
+    "files": [
+        {
+            "name": "index.ts"
+        }
+    ]
+}

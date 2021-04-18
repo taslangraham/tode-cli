@@ -1,0 +1,79 @@
+{
+  "name": "tode-cli",
+  "version": "0.0.0",
+  "author": "taslangraham",
+  "bin": {
+    "tode": "bin/run"
+  },
+  "bugs": {
+    "url": "https://github.com/tode/tode/issues"
+  },
+  "dependencies": {
+    "@oclif/command": "^1.8.0",
+    "@oclif/config": "^1.17.0",
+    "@oclif/parser": "^3.8.5",
+    "@oclif/plugin-help": "^3.2.2",
+    "chalk": "^4.1.0",
+    "npm": "^7.9.0",
+    "shelljs": "^0.8.4",
+    "tslib": "^1.14.1"
+  },
+  "devDependencies": {
+    "@oclif/dev-cli": "^1.26.0",
+    "@oclif/test": "^1.2.8",
+    "@types/chai": "^4.2.16",
+    "@types/mocha": "^5.2.7",
+    "@types/node": "^10.17.56",
+    "@types/npm": "^2.0.31",
+    "@types/rimraf": "^3.0.0",
+    "@types/shelljs": "^0.8.8",
+    "chai": "^4.3.4",
+    "eslint": "^5.16.0",
+    "eslint-config-oclif": "^3.1.0",
+    "eslint-config-oclif-typescript": "^0.1.0",
+    "globby": "^10.0.2",
+    "mocha": "^5.2.0",
+    "nyc": "^14.1.1",
+    "rimraf": "^3.0.2",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.9"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "files": [
+    "/bin",
+    "/lib",
+    "/npm-shrinkwrap.json",
+    "/oclif.manifest.json"
+  ],
+  "homepage": "https://github.com/tode/tode",
+  "keywords": [
+    "oclif"
+  ],
+  "license": "MIT",
+  "main": "src/index.js",
+  "oclif": {
+    "commands": "./lib/commands",
+    "bin": "tode",
+    "plugins": [
+      "@oclif/plugin-help"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tode/tode.git"
+  },
+  "scripts": {
+    "postpack": "rimraf oclif.manifest.json",
+    "posttest": "eslint . --ext .ts --config .eslintrc",
+    "prepack": "rimraf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
+    "test": "nyc --extension .ts mocha --forbid-only \"test/**/*.test.ts\"",
+    "version": "oclif-dev readme && git add README.md"
+  },
+  "types": "lib/index.d.ts",
+  "description": "tode ====",
+  "directories": {
+    "test": "test"
+  }
+}
