@@ -4,7 +4,7 @@ tode
 
 
 [![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
-[![Version](https://img.shields.io/npm/v/tode.svg)](https://npmjs.org/package/tode)
+[![Version](https://img.shields.io/npm/v/tode.svg)](https://npmjs.org/package/tode-cli)
 [![Downloads/week](https://img.shields.io/npm/dw/tode.svg)](https://npmjs.org/package/tode)
 [![License](https://img.shields.io/npm/l/tode.svg)](https://github.com/tode/tode/blob/master/package.json)
 
@@ -15,7 +15,7 @@ tode
 # Usage
 <!-- usage -->
 ```sh-session
-$ npm install -g tode
+$ npm install -g tode-cli
 $ tode COMMAND
 running command...
 $ tode (-v|--version|version)
