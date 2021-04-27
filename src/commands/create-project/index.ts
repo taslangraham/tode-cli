@@ -2,7 +2,7 @@ import { Command, flags } from '@oclif/command';
 import chalk = require('chalk');
 import * as rimraf from 'rimraf';
 import * as shell from 'shelljs';
-import { starterTemplateRepo } from '../../config';
+import { starterTemplateRepo, SUCCESS_EXIT_CODE } from '../../config';
 import { formatFeatureName, isDirectoryExist } from '../../libs';
 // tslint:disable-next-line: no-console
 const Log = console.log;
@@ -31,12 +31,17 @@ export default class CreateProject extends Command {
 
     Log(chalk.green(`Generating Project - ${chalk.yellow(projectName)} ....`));
 
-    await shell.exec(`git clone ${starterTemplateRepo} ${projectName}`,
+    const creation = await shell.exec(`git clone ${starterTemplateRepo} ${projectName}`,
       {
-        silent: true,
+        silent: false,
         timeout: 1500,
-        fatal: true,
       });
+
+    if (creation.code !== SUCCESS_EXIT_CODE) {
+      console.log(creation)
+      console.log(chalk.gray(creation.stderr))
+      throw new Error('Failed to create project. Please ensure you have an internet connection.');
+    }
 
     rimraf.sync(`${projectName}/.git`);
 

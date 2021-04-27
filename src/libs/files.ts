@@ -116,3 +116,24 @@ export function kebabToPascal(rawName: string) {
 
   return pascalCase;
 }
+
+/**
+ * Accepts a string and converts it to camelCase
+ * @param rawString unformatted string
+ */
+export function kebabToCamelCase(rawString: string) {
+  const stringParts = rawString.split('-');
+  const firstWord = stringParts[0];
+
+  const camelCase = firstWord + stringParts
+    .slice(1)
+    .map((word) => {
+      const firstLetter = word[0];
+
+      // Capitalize the first letter of each word and return it
+      return word.replace(firstLetter, firstLetter.toLocaleUpperCase());
+    })
+    .join('');
+
+  return camelCase;
+}

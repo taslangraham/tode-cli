@@ -7,39 +7,40 @@ import {
   getRootDir,
   getTemplateDriver,
   isExist,
+  kebabToCamelCase,
   kebabToPascal,
   replaceFileSubstring,
 } from '../../libs';
 import { Driver } from '../../types/driver';
 
-const MODEL_NAME = 'model_name';
+const SERVICE_NAME = 'service_name';
 
-export default class Model extends Command {
-  public static description = 'adds a new Databse Model';
+export default class Service extends Command {
+  public static description = 'adds a new service';
   public static strict = true;
 
   public static flags = {
     help: flags.help({ char: 'h' }),
   };
 
-  public static aliases = ['am'];
+  public static aliases = ['as'];
 
   public static args = [{
-    name: MODEL_NAME,
-    description: 'Name of model to create',
+    name: SERVICE_NAME,
+    description: 'Name of service to create',
     required: true,
   }];
 
-  public static examples = [`tode add:model ${MODEL_NAME}`];
+  public static examples = [`tode add:model ${SERVICE_NAME}`];
+  private driver: Driver = getTemplateDriver('service');
 
-  private driver: Driver = getTemplateDriver('model');
   public async run() {
     const { driver } = this;
-    const { args } = this.parse(Model);
+    const { args } = this.parse(Service);
 
-    const modelName = args[MODEL_NAME] as string;
+    const serviceName = args[SERVICE_NAME] as string;
     const isModelsFolderExist = isExist(driver.destination);
-    const destinationFolder = `${driver.destination}/${modelName}`.toLocaleLowerCase();
+    const destinationFolder = `${driver.destination}/${serviceName}`.toLocaleLowerCase();
 
     // Create the models folder if it does not exist
     if (!isModelsFolderExist) {
@@ -70,14 +71,24 @@ export default class Model extends Command {
       }
 
       // look for kebabs defined in files and replace them with appropriate text (model name etc)
-      const contentReplacement = replaceFileSubstring(fileDestination, 'ModelClassName', kebabToPascal(modelName));
+      const serviceNameReplacement = replaceFileSubstring(
+        fileDestination,
+        /ServiceName/g,
+        kebabToCamelCase(serviceName),
+      );
 
-      if (!contentReplacement.success) {
+      const classNameReplacement = replaceFileSubstring(
+        fileDestination,
+        /ServiceClassName/g,
+        kebabToPascal(serviceName),
+      );
+
+      if (!(serviceNameReplacement.success && classNameReplacement.success)) {
         rimraf.sync(destinationFolder);
-        throw new Error('Created model but failed to update its contents. \n Reverting changes!');
+        throw new Error('Created service but failed to update its contents. \n Reverting changes!');
       }
 
-      this.log(`${chalk.green(`Created model - ${chalk.yellow(`${modelName}`)}`)}`);
+      this.log(`${chalk.green(`Created service - ${chalk.yellow(`${serviceName}`)}`)}`);
     }
   }
 }
