@@ -31,7 +31,7 @@ export default class Service extends Command {
     required: true,
   }];
 
-  public static examples = [`tode add:model ${SERVICE_NAME}`];
+  public static examples = [`tode add:service ${SERVICE_NAME}`];
   private driver: Driver = getTemplateDriver('service');
 
   public async run() {
@@ -39,11 +39,11 @@ export default class Service extends Command {
     const { args } = this.parse(Service);
 
     const serviceName = args[SERVICE_NAME] as string;
-    const isModelsFolderExist = isExist(driver.destination);
+    const isServicesFolderExist = isExist(driver.destination);
     const destinationFolder = `${driver.destination}/${serviceName}`.toLocaleLowerCase();
 
-    // Create the models folder if it does not exist
-    if (!isModelsFolderExist) {
+    // Create the services folder if it does not exist
+    if (!isServicesFolderExist) {
       createFolder(driver.destination);
     }
 
@@ -67,10 +67,10 @@ export default class Service extends Command {
         fileDestination);
 
       if (copyResult.stderr && copyResult.code !== 0) {
-        throw new Error(`Failed to create Model \n${copyResult.stderr}`);
+        throw new Error(`Failed to create Service \n${copyResult.stderr}`);
       }
 
-      // look for kebabs defined in files and replace them with appropriate text (model name etc)
+      // look for kebabs defined in files and replace them with appropriate text (service name etc)
       const serviceNameReplacement = replaceFileSubstring(
         fileDestination,
         /ServiceName/g,

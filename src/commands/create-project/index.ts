@@ -26,7 +26,7 @@ export default class CreateProject extends Command {
     const projectName = formatFeatureName(args['project name']);
 
     if (isDirectoryExist(projectName)) {
-      throw new Error(chalk.red(`There's already a Project with the name '${projectName}'`))
+      throw new Error(chalk.red(`There's already a Project with the name '${projectName}'`));
     }
 
     Log(chalk.green(`Generating Project - ${chalk.yellow(projectName)} ....`));
@@ -46,9 +46,8 @@ export default class CreateProject extends Command {
     Log(chalk.green(`Installing dependencies ....`));
     await shell.exec(`cd ${projectName} && npm i`, { silent: false });
 
-    // Log('\n\n');
     Log(chalk.green(`Project generated successfully`));
-    Log(chalk.green('-------------------------------'))
+    Log(chalk.green('-------------------------------'));
     Log(`run 'cd ${chalk.yellow(projectName)}' to enter project folder`);
 
   }
