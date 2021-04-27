@@ -32,8 +32,9 @@ USAGE
 # Commands
 <!-- commands -->
 * [`tode add`](#tode-add)
-* [`tode add:controller CONTROLLER_NAME [PATH]`](#tode-addcontroller-controller_name-path)
+* [`tode add:controller CONTROLLER_NAME`](#tode-addcontroller-controller_name)
 * [`tode add:model MODEL_NAME`](#tode-addmodel-model_name)
+* [`tode add:service SERVICE_NAME`](#tode-addservice-service_name)
 * [`tode create-project PROJECT NAME`](#tode-create-project-project-name)
 * [`tode help [COMMAND]`](#tode-help-command)
 
@@ -48,17 +49,16 @@ USAGE
 
 _See code: [src/commands/add/index.ts](https://github.com/tode/tode/blob/v0.0.0/src/commands/add/index.ts)_
 
-## `tode add:controller CONTROLLER_NAME [PATH]`
+## `tode add:controller CONTROLLER_NAME`
 
 Adds a controller to the application
 
 ```
 USAGE
-  $ tode add:controller CONTROLLER_NAME [PATH]
+  $ tode add:controller CONTROLLER_NAME
 
 ARGUMENTS
   CONTROLLER_NAME  Name of controller to create
-  PATH             URL path that controller will be accessed at
 
 OPTIONS
   -h, --help  show CLI help
@@ -94,6 +94,29 @@ EXAMPLE
 ```
 
 _See code: [src/commands/add/model.ts](https://github.com/tode/tode/blob/v0.0.0/src/commands/add/model.ts)_
+
+## `tode add:service SERVICE_NAME`
+
+adds a new service
+
+```
+USAGE
+  $ tode add:service SERVICE_NAME
+
+ARGUMENTS
+  SERVICE_NAME  Name of service to create
+
+OPTIONS
+  -h, --help  show CLI help
+
+ALIASES
+  $ tode as
+
+EXAMPLE
+  tode add:service service_name
+```
+
+_See code: [src/commands/add/service.ts](https://github.com/tode/tode/blob/v0.0.0/src/commands/add/service.ts)_
 
 ## `tode create-project PROJECT NAME`
 
