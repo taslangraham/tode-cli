@@ -38,8 +38,6 @@ export default class CreateProject extends Command {
       });
 
     if (creation.code !== SUCCESS_EXIT_CODE) {
-      console.log(creation)
-      console.log(chalk.gray(creation.stderr))
       throw new Error('Failed to create project. Please ensure you have an internet connection.');
     }
 
