@@ -76,6 +76,10 @@ export function isExist(path: string) {
   return fs.existsSync(path);
 }
 
+export function getFile(path: string) {
+  return fs.readFileSync(path, UTF8);
+}
+
 /**
  * Reads in a file and replace all occurrence of a substring within the given string
  * @param filePath filePath Path of the file to be updated
@@ -86,11 +90,11 @@ export function replaceFileSubstring(filePath: string, pattern: string | RegExp,
   const result = {} as FileOperationRespose;
 
   try {
-    const updatedFileContents = fs.readFileSync(filePath, 'utf8')
+    const updatedFileContents = fs.readFileSync(filePath, UTF8)
       .replace(pattern, newString);
     result.success = true;
 
-    fs.writeFileSync(filePath, updatedFileContents, 'utf8');
+    fs.writeFileSync(filePath, updatedFileContents, UTF8);
   } catch (error) {
     result.success = false;
   }
@@ -98,7 +102,23 @@ export function replaceFileSubstring(filePath: string, pattern: string | RegExp,
   return result;
 }
 
+/**
+ * Reads in a file and updates its content with the given string
+ * @param filePath filePath Path of the file to be updated
+ * @param content file content
+ */
+export function writeFile(filePath: string, content: string) {
+  const result = {} as FileOperationRespose;
 
+  try {
+    fs.writeFileSync(filePath, content, UTF8);
+    result.success = true;
+  } catch (error) {
+    result.success = false;
+  }
+
+  return result;
+}
 /**
  * Accepts a string and converts it to PascalCase
  * @param rawName unformatted class name

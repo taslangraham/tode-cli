@@ -47,8 +47,7 @@ export default class Service extends Command {
       createFolder(driver.destination);
     }
 
-    console.clear();
-    //Create folder to house controller file
+    // Create folder to house controller file
     const { success, message } = createFolder(destinationFolder);
 
     if (!success) {
@@ -57,7 +56,6 @@ export default class Service extends Command {
 
     // Copy each file defined the files section of the driver
     for (const { name } of driver.files) {
-      // TODO create generic file copier method
 
       const fileDestination = `${destinationFolder}/${name}`;
 

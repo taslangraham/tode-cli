@@ -8,9 +8,15 @@
     "strict": true,
     "target": "es2017",
     "alwaysStrict": true,
-    "composite": true
+    "composite": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "src/*"
+      ]
+    }
   },
   "include": [
     "src/**/*"
-  ]
+  ],
 }

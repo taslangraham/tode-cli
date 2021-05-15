@@ -31,8 +31,8 @@ export default class Model extends Command {
   }];
 
   public static examples = [`tode add:model ${MODEL_NAME}`];
-
   private driver: Driver = getTemplateDriver('model');
+
   public async run() {
     const { driver } = this;
     const { args } = this.parse(Model);
@@ -46,7 +46,6 @@ export default class Model extends Command {
       createFolder(driver.destination);
     }
 
-    console.clear();
     //Create folder to house controller file
     const { success, message } = createFolder(destinationFolder);
 
@@ -70,7 +69,8 @@ export default class Model extends Command {
       }
 
       // look for kebabs defined in files and replace them with appropriate text (model name etc)
-      const contentReplacement = replaceFileSubstring(fileDestination, 'ModelClassName', kebabToPascal(modelName));
+      const contentReplacement = replaceFileSubstring(fileDestination, 'ModelClassName',
+        `${kebabToPascal(modelName)}Model`);
 
       if (!contentReplacement.success) {
         rimraf.sync(destinationFolder);
