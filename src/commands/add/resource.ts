@@ -26,21 +26,38 @@ export default class Resource extends Command {
   }];
 
   public static examples = [`tode add:resource ${RESOURCE_NAME}`];
-  private serviceDriver: Driver = files.getTemplateDriver('service');
-
+  private serviceDriver = files.getTemplateDriver('service');
+  private controllerDriver = files.getTemplateDriver('controller');
   public async run() {
     const { args } = this.parse(Resource);
-    const resourceName = args[RESOURCE_NAME] as string;
+    const featureName = args[RESOURCE_NAME] as string;
 
     // Install each resource item
     try {
-      await controller.run([resourceName]);
-      await model.run([resourceName]);
-      await service.run([resourceName]);
-      const { success } = this.importModelToServiceFile(resourceName);
+      await controller.run([featureName]);
+      await model.run([featureName]);
+      await service.run([featureName]);
+      const name = files.kebabToPascal(featureName);
 
-      if (success) {
-        throw new Error(`Failed to import model [${resourceName}] into service [${resourceName}]`);
+      try {
+        // Import model into service file
+        const serviceImportStatement = `import { ${name}Model } from '../../models/${featureName}';\n`;
+
+        this.addImportStatementToFile(serviceImportStatement,
+          `${this.serviceDriver.destination}/${featureName}/index.ts`,
+          featureName,
+        );
+
+        // Import model into service file
+        // tslint:disable-next-line: max-line-length
+        const controllerImportStatement = `import { ${files.kebabToCamelCase(featureName)}Service } from '../../services/${featureName}';\n`;
+
+        this.addImportStatementToFile(controllerImportStatement,
+          `${this.controllerDriver.destination}/${featureName}/index.ts`,
+          featureName,
+        );
+      } catch (error) {
+        throw new Error('Failed to create all resource files');
       }
 
     } catch (error) {
@@ -53,18 +70,17 @@ export default class Resource extends Command {
 
   /**
    *
-   * @param name service name
+   * @param importStatement import statement
+   * @param filePath file path
+   *
    */
-  private importModelToServiceFile(serviceName: string) {
+  private addImportStatementToFile(importStatement: string, filePath: string, featureName: string) {
     try {
       // Add model import statement to service file
-      const name = files.kebabToPascal(serviceName);
-      let importStatement = `import { ${name}Model } from '../../models/${serviceName}';\n`;
-      const serviceFile = files.getFile(`${this.serviceDriver.destination}/${serviceName}/index.ts`);
-      const finalServiceFileContent = importStatement += serviceFile;
+      const file = files.getFile(filePath);
+      const finalServiceFileContent = importStatement += file;
 
-      files.writeFile(`${this.serviceDriver.destination}/${serviceName}/index.ts`,
-        finalServiceFileContent);
+      files.writeFile(filePath, finalServiceFileContent);
 
       return { success: true };
     } catch (error) {
