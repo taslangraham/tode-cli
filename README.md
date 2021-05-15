@@ -34,6 +34,7 @@ USAGE
 * [`tode add`](#tode-add)
 * [`tode add:controller CONTROLLER_NAME`](#tode-addcontroller-controller_name)
 * [`tode add:model MODEL_NAME`](#tode-addmodel-model_name)
+* [`tode add:resource RESOURCE_NAME`](#tode-addresource-resource_name)
 * [`tode add:service SERVICE_NAME`](#tode-addservice-service_name)
 * [`tode create-project PROJECT NAME`](#tode-create-project-project-name)
 * [`tode help [COMMAND]`](#tode-help-command)
@@ -94,6 +95,29 @@ EXAMPLE
 ```
 
 _See code: [src/commands/add/model.ts](https://github.com/tode/tode/blob/v0.0.0/src/commands/add/model.ts)_
+
+## `tode add:resource RESOURCE_NAME`
+
+adds a complete resource (mode, controller, service
+
+```
+USAGE
+  $ tode add:resource RESOURCE_NAME
+
+ARGUMENTS
+  RESOURCE_NAME  Name of resource to create
+
+OPTIONS
+  -h, --help  show CLI help
+
+ALIASES
+  $ tode rs
+
+EXAMPLE
+  tode add:resource resource_name
+```
+
+_See code: [src/commands/add/resource.ts](https://github.com/tode/tode/blob/v0.0.0/src/commands/add/resource.ts)_
 
 ## `tode add:service SERVICE_NAME`
 
