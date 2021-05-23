@@ -8,7 +8,12 @@ import model from './model';
 import service from './service';
 
 const RESOURCE_NAME = 'resource_name';
-
+const moduleImports = [
+  {
+    feature: 'service',
+    statement: '',
+  }
+]
 export default class Resource extends Command {
   public static description = 'adds a complete resource (mode, controller, service';
   public static strict = true;
