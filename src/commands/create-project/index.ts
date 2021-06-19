@@ -43,13 +43,9 @@ export default class CreateProject extends Command {
 
     rimraf.sync(`${projectName}/.git`);
 
-    Log(chalk.green(`Installing dependencies ....`));
-    await shell.exec(`cd ${projectName} && npm i`, { silent: false });
-
     Log(chalk.green(`Project generated successfully`));
     Log(chalk.green('-------------------------------'));
     Log(`run 'cd ${chalk.yellow(projectName)}' to enter project folder`);
-
   }
 
   public async catch(error: Error) {
