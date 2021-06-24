@@ -70,7 +70,7 @@ export default class Model extends Command {
 
       // look for kebabs defined in files and replace them with appropriate text (model name etc)
       const contentReplacement = replaceFileSubstring(fileDestination, 'ModelClassName',
-        `${kebabToPascal(modelName)}Model`);
+        `${kebabToPascal(modelName)}`);
 
       if (!contentReplacement.success) {
         rimraf.sync(destinationFolder);

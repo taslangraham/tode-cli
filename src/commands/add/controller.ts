@@ -62,7 +62,6 @@ export default class Controller extends Command {
       throw new Error(`Operation Failed - ${message}`);
     }
 
-
     // Copy each file defined the files section of the driver
     for (const { name } of driver.files) {
       // TODO create generic file copier method

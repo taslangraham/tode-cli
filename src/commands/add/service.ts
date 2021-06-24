@@ -78,7 +78,7 @@ export default class Service extends Command {
       const classNameReplacement = replaceFileSubstring(
         fileDestination,
         /ServiceClassName/g,
-        kebabToPascal(serviceName),
+        `${kebabToPascal(serviceName)}Service`,
       );
 
       if (!(serviceNameReplacement.success && classNameReplacement.success)) {
