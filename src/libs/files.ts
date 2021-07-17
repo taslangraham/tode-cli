@@ -1,6 +1,6 @@
 import { string } from '@oclif/parser/lib/flags';
 import * as fs from 'fs';
-
+import * as path from 'path';
 import * as shell from 'shelljs';
 import { OPTION_RECURSIVE, SUCCESS_EXIT_CODE } from '../config';
 import { UTF8 } from '../constants/variables';
@@ -13,7 +13,7 @@ import { FileOperationRespose } from '../types/files';
  * @param templateName Name of template folder
  */
 export function getTemplateDriver(templateName: string) {
-  return require(`${rootDir}\\template\\${templateName}\\driver.json`) as Driver;
+  return require(`${getProjectRoot()}.tode\\.template\\${templateName}\\driver.json`) as Driver;
 }
 
 /**
@@ -37,13 +37,6 @@ export function createFolder(path: string, overwrite: boolean = false) {
   result.message = success ? operation.stdout : operation.stderr;
 
   return result;
-}
-
-/**
- * Gets the root directory of a current file
- */
-export function getFolderBaseDirectory() {
-  // console.log('dddd', rootDir)
 }
 
 export function getRootDir() {
@@ -156,4 +149,64 @@ export function kebabToCamelCase(rawString: string) {
     .join('');
 
   return camelCase;
+}
+
+
+/**
+ * Description: determine if is root directory of rdvue project
+ */
+function isRootDirectory(location: string | null = null): boolean {
+  let isRoot = false;
+  try {
+    let paths = [];
+    let testLocation = location;
+    if (location === null) {
+      testLocation = process.cwd();
+    }
+
+    if (testLocation !== null) {
+      paths = testLocation.split(path.sep)
+      if (paths.length > 0 && paths[1] === '') {
+        isRoot = true;
+      }
+    }
+  } catch (e) {
+    // tslint:disable-next-line:no-console
+    throw new Error('Error checking root directory');
+    isRoot = true;
+  }
+
+  return isRoot;
+}
+
+/**
+ * Description: determine the root of the current project
+ */
+export function getProjectRoot() {
+  const configFolderName = '.tode';
+  const maxTraverse = 20;
+
+  let currentPath = process.cwd();
+  let currentTraverse = 0;
+  let projectRoot = null;
+  let back = './';
+
+  while (true) {
+    currentPath = path.join(process.cwd(), back);
+    back = path.join(back, '../');
+    currentTraverse += 1;
+
+    if (isExist(path.join(currentPath, configFolderName))) {
+      projectRoot = currentPath;
+      break;
+    } else if (isRootDirectory(currentPath)) {
+      projectRoot = null;
+      break;
+    } else if (currentTraverse > maxTraverse) {
+      projectRoot = null;
+      break;
+    }
+  }
+
+  return projectRoot;
 }

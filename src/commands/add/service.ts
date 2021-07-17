@@ -4,6 +4,7 @@ import rimraf = require('rimraf');
 import {
   copyFile,
   createFolder,
+  getProjectRoot,
   getRootDir,
   getTemplateDriver,
   isExist,
@@ -60,7 +61,7 @@ export default class Service extends Command {
       const fileDestination = `${destinationFolder}/${name}`;
 
       const copyResult = copyFile(
-        `${getRootDir()
+        `${getProjectRoot()
         }/${driver.sourceDir}/${name}`,
         fileDestination);
 

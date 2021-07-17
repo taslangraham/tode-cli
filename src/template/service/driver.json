@@ -1,9 +1,0 @@
-{
-  "sourceDir": "template/service",
-  "destination": "src/services",
-  "files": [
-    {
-      "name": "index.ts"
-    }
-  ]
-}

@@ -1,9 +1,12 @@
 import { Command, flags } from '@oclif/command';
 import * as chalk from 'chalk';
 import rimraf = require('rimraf');
+import { exec } from 'shelljs';
 import {
   copyFile,
   createFolder,
+  getFile,
+  getProjectRoot,
   getRootDir,
   getTemplateDriver,
   isExist,
@@ -40,7 +43,7 @@ export default class Controller extends Command {
 
   public static examples = ['tode add:controller <controller_name>'];
 
-  private driver: Driver = getTemplateDriver('controller');
+  private driver: Driver = getTemplateDriver(`controller`);
 
   public async run() {
     const { driver } = this;
@@ -57,7 +60,6 @@ export default class Controller extends Command {
 
     //Create folder to house controller file
     const { success, message } = createFolder(destinationFolder);
-
     if (!success) {
       throw new Error(`Operation Failed - ${message}`);
     }
@@ -67,10 +69,9 @@ export default class Controller extends Command {
       // TODO create generic file copier method
 
       const fileDestination = `${destinationFolder}/${name}`;
-
       const copyResult = copyFile(
-        `${getRootDir()
-        }/${driver.sourceDir}/${name}`,
+        `${getProjectRoot()
+        }${driver.sourceDir}/${name}`,
         fileDestination);
 
       if (copyResult.stderr && copyResult.code !== 0) {
@@ -94,3 +95,4 @@ export default class Controller extends Command {
     this.error(chalk.red(error));
   }
 }
+

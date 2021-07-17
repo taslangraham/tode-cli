@@ -4,6 +4,7 @@ import rimraf = require('rimraf');
 import {
   copyFile,
   createFolder,
+  getProjectRoot,
   getRootDir,
   getTemplateDriver,
   isExist,
@@ -60,8 +61,8 @@ export default class Model extends Command {
       const fileDestination = `${destinationFolder}/${name}`;
 
       const copyResult = copyFile(
-        `${getRootDir()
-        }/${driver.sourceDir}/${name}`,
+        `${getProjectRoot()
+        }${driver.sourceDir}/${name}`,
         fileDestination);
 
       if (copyResult.stderr && copyResult.code !== 0) {
@@ -70,7 +71,7 @@ export default class Model extends Command {
 
       // look for kebabs defined in files and replace them with appropriate text (model name etc)
       const contentReplacement = replaceFileSubstring(fileDestination, 'ModelClassName',
-        `${kebabToPascal(modelName)}`);
+        `${kebabToPascal(modelName)} `);
 
       if (!contentReplacement.success) {
         rimraf.sync(destinationFolder);
@@ -81,3 +82,16 @@ export default class Model extends Command {
     }
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
