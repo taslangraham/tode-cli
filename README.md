@@ -1,4 +1,4 @@
-tode
+**tode**
 ====
 
 
@@ -11,44 +11,24 @@ tode
 <!-- toc -->
 * [Usage](#usage)
 * [Commands](#commands)
-* [tode-cli](#tode-cli)
-* [tode-cli](#tode-cli-1)
-* [tode-cli](#tode-cli-2)
 <!-- tocstop -->
-# Usage
+# **Usage**
 <!-- usage -->
-```sh-session
-$ npm install -g tode-cli
-$ tode COMMAND
-running command...
-$ tode (-v|--version|version)
-tode-cli/0.0.0 win32-x64 node-v14.15.1
-$ tode --help [COMMAND]
-USAGE
-  $ tode COMMAND
-...
+To run locally
+
+``` bash
+npm link
+tode create-project hello-world
 ```
 <!-- usagestop -->
-# Commands
+# **Commands**
 <!-- commands -->
-* [`tode add`](#tode-add)
-* [`tode add:controller CONTROLLER_NAME`](#tode-addcontroller-controller_name)
-* [`tode add:model MODEL_NAME`](#tode-addmodel-model_name)
-* [`tode add:resource RESOURCE_NAME`](#tode-addresource-resource_name)
-* [`tode add:service SERVICE_NAME`](#tode-addservice-service_name)
-* [`tode create-project PROJECT NAME`](#tode-create-project-project-name)
+* [`tode add:controller <CONTROLLER_NAME>`](#tode-addcontroller-controller_name)
+* [`tode add:model <MODEL_NAME>`](#tode-addmodel-model_name)
+* [`tode add:resource <RESOURCE_NAME>`](#tode-addresource-resource_name)
+* [`tode add:service <SERVICE_NAME>`](#tode-addservice-service_name)
+* [`tode create-project <PROJECT_NAME`](#tode-create-project-project-name)
 * [`tode help [COMMAND]`](#tode-help-command)
-
-## `tode add`
-
-add a new module
-
-```
-USAGE
-  $ tode add
-```
-
-_See code: [src/commands/add/index.ts](https://github.com/tode/tode/blob/v0.0.0/src/commands/add/index.ts)_
 
 ## `tode add:controller CONTROLLER_NAME`
 
@@ -179,6 +159,3 @@ OPTIONS
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.2.2/src/commands/help.ts)_
 <!-- commandsstop -->
-# tode-cli
-# tode-cli
-# tode-cli

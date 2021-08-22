@@ -45,7 +45,7 @@ export function getRootDir() {
 
 // TODO Update this method to return the files resposne type
 /**
- * Copies files from one location toanother
+ * Copies files from one location to another
  * @param source source files/folders
  * @param destination destination path
  * @param options
