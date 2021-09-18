@@ -6,7 +6,7 @@ export interface Driver {
   devDependencies: string[];
 }
 
-interface DriverFile {
+export interface DriverFile {
   name: string;
   source: string;
   destination: string;

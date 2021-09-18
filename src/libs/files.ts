@@ -1,6 +1,6 @@
 import { string } from '@oclif/parser/lib/flags';
 import * as fs from 'fs';
-import * as path from 'path';
+import * as pathjs from 'path';
 import * as shell from 'shelljs';
 import { OPTION_RECURSIVE, SUCCESS_EXIT_CODE } from '../config';
 import { UTF8 } from '../constants/variables';
@@ -14,6 +14,23 @@ import { FileOperationRespose } from '../types/files';
  */
 export function getTemplateDriver(templateName: string) {
   return require(`${getProjectRoot()}.tode\\.template\\${templateName}\\driver.json`) as Driver;
+}
+
+/**
+ * Returns the driver file of a template
+ * @param templateName Name of template folder
+ */
+export function getLastFileInFolder(folderPath: string) {
+  // return require(`${getProjectRoot()}folderPath`);
+  const files = orderReccentFiles(folderPath);
+  return files.length ? files[0] : undefined;
+}
+
+function orderReccentFiles(dir: string) {
+  return fs.readdirSync(dir)
+    .filter((file) => fs.lstatSync(pathjs.join(dir, file)).isFile())
+    .map((file) => ({ file, mtime: fs.lstatSync(pathjs.join(dir, file)).mtime }))
+    .sort((a, b) => b.mtime.getTime() - a.mtime.getTime());
 }
 
 /**
@@ -165,7 +182,7 @@ function isRootDirectory(location: string | null = null): boolean {
     }
 
     if (testLocation !== null) {
-      paths = testLocation.split(path.sep)
+      paths = testLocation.split(pathjs.sep)
       if (paths.length > 0 && paths[1] === '') {
         isRoot = true;
       }
@@ -173,7 +190,6 @@ function isRootDirectory(location: string | null = null): boolean {
   } catch (e) {
     // tslint:disable-next-line:no-console
     throw new Error('Error checking root directory');
-    isRoot = true;
   }
 
   return isRoot;
@@ -192,11 +208,11 @@ export function getProjectRoot() {
   let back = './';
 
   while (true) {
-    currentPath = path.join(process.cwd(), back);
-    back = path.join(back, '../');
+    currentPath = pathjs.join(process.cwd(), back);
+    back = pathjs.join(back, '../');
     currentTraverse += 1;
 
-    if (isExist(path.join(currentPath, configFolderName))) {
+    if (isExist(pathjs.join(currentPath, configFolderName))) {
       projectRoot = currentPath;
       break;
     } else if (isRootDirectory(currentPath)) {
