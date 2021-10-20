@@ -39,7 +39,7 @@ export default class Resource extends Command {
 
       try {
         // Import model into service file
-        const serviceImportStatement = `import { ${name}Model } from '../../models/${featureName}';\n`;
+        const serviceImportStatement = `import { ${name} } from '../../models/${featureName}';\n`;
 
         this.addImportStatementToFile(serviceImportStatement,
           `${this.serviceDriver.destination}/${featureName}/index.ts`,
