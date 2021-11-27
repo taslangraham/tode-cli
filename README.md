@@ -2,7 +2,6 @@
 ====
 
 
-
 [![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
 [![Version](https://img.shields.io/npm/v/tode.svg)](https://npmjs.org/package/tode-cli)
 <!-- [![Downloads/week](https://img.shields.io/npm/dw/tode.svg)](https://npmjs.org/package/tode) -->
@@ -160,3 +159,27 @@ OPTIONS
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.2.2/src/commands/help.ts)_
 <!-- commandsstop -->
+
+# **Database**
+## **Objection.js**
+Tode leverage's the [Objection.js](https://vincit.github.io/objection.js/) ORM, and Knex.js query builder.  
+
+Objection.js is an ORM (opens new window)for Node.js (opens new window)that aims to stay out of your way and make it as easy as possible to use the full power of SQL and the underlying database engine while still making the common stuff easy and enjoyable.  
+
+
+Even though ORM is the best commonly known acronym to describe objection, a more accurate description is to call it a relational query builder. You get all the benefits of an SQL query builder but also a powerful set of tools for working with relations.  
+
+Objection.js is built on an SQL query builder called knex (opens new window). All databases supported by knex are supported by objection.js. SQLite3, Postgres and MySQL are thoroughly tested (opens new window).  
+
+   
+The underlying databse connection is setup up using Knex.js, and the top level ORM functionalities are done using Objection.js.  
+
+You can read more here to learn how Objection.js works with knex.js.  
+
+
+## **Knex.js**
+Tode uses [knex.js](https://knexjs.org/) to create migrations and seeders. All knex.js commands are available in tode.js.
+## **Models**
+Tode's models are Objection.js models. [Read more here.](https://vincit.github.io/objection.js/guide/models.html).  
+The ``tableName`` property on model holds the name of the table that the model maps to. This property is a requeired property on all models.  
+Model relationships  - https://vincit.github.io/objection.js/guide/relations.html
