@@ -1,6 +1,6 @@
 {
   "name": "tode-cli",
-  "version": "0.1.4",
+  "version": "0.1.12",
   "author": "taslangraham",
   "bin": {
     "tode": "bin/run"
@@ -68,9 +68,7 @@
     "url": "git+https://github.com/tode/tode.git"
   },
   "scripts": {
-    "postpack": "rimraf oclif.manifest.json",
     "posttest": "eslint . --ext .ts --config .eslintrc",
-    "prepack": "rimraf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
     "test": "nyc --extension .ts mocha --forbid-only \"test/**/*.test.ts\"",
     "version": "oclif-dev readme && git add README.md",
     "generate:readme": "oclif-dev readme"

@@ -1,8 +1,7 @@
 **Tode CLI**
 ====
+CLI tool for scaffolding Node API  
 
-
-[![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
 [![Version](https://img.shields.io/npm/v/tode.svg)](https://www.npmjs.com/package/tode-cli)
 <!-- [![Downloads/week](https://img.shields.io/npm/dw/tode.svg)](https://npmjs.org/package/tode) -->
 [![License](https://img.shields.io/npm/l/tode.svg)](https://github.com/tode/tode/blob/master/package.json)
@@ -11,63 +10,46 @@
 * [**Usage**](#usage)
 * [**Commands**](#commands)
 * [**Database**](#database)
+
 # **Usage**
-<!-- usage -->
-```sh-session
-$ npm install -g tode-cli
-$ tode COMMAND
-running command...
-$ tode (-v|--version|version)
-tode-cli/0.1.2 win32-x64 node-v14.17.6
-$ tode --help [COMMAND]
-USAGE
-  $ tode COMMAND
-...
+
 ```
-<!-- usagestop -->
-```sh-session
 $ npm install -g tode-cli
 $ tode create-project hello-world
 ```
 <!-- usagestop -->
 # **Commands**
 <!-- commands -->
-* [`tode add`](#tode-add)
-* [`tode add:auth`](#tode-addauth)
+* [`tode create-project PROJECT NAME`](#tode-create-project-project-name)
 * [`tode add:controller CONTROLLER_NAME`](#tode-addcontroller-controller_name)
 * [`tode add:model MODEL_NAME`](#tode-addmodel-model_name)
 * [`tode add:resource RESOURCE_NAME`](#tode-addresource-resource_name)
 * [`tode add:service SERVICE_NAME`](#tode-addservice-service_name)
-* [`tode create-project PROJECT NAME`](#tode-create-project-project-name)
+* [`tode add:auth`](#tode-addauth)
 * [`tode help [COMMAND]`](#tode-help-command)
 
-## `tode add`
+## `tode create-project PROJECT NAME`
 
-add a new module
-
-```
-USAGE
-  $ tode add
-```
-
-_See code: [src/commands/add/index.ts](https://github.com/tode/tode/blob/v0.1.2/src/commands/add/index.ts)_
-
-## `tode add:auth`
-
-adds JWT authentication
+Scaffolds a fresh Tode project
 
 ```
 USAGE
-  $ tode add:auth
+  $ tode create-project PROJECT NAME
+
+ARGUMENTS
+  PROJECT NAME  Name of project to create
 
 OPTIONS
   -h, --help  show CLI help
 
-ALIASES
-  $ tode aa
+EXAMPLE
+  tode create-project myNewProject
 ```
 
-_See code: [src/commands/add/auth.ts](https://github.com/tode/tode/blob/v0.1.2/src/commands/add/auth.ts)_
+_See code: [src/commands/create-project/index.ts](https://github.com/tode/tode/blob/v0.1.2/src/commands/create-project/index.ts)_
+
+
+
 
 ## `tode add:controller CONTROLLER_NAME`
 
@@ -90,7 +72,6 @@ EXAMPLE
   tode add:controller <controller_name>
 ```
 
-_See code: [src/commands/add/controller.ts](https://github.com/tode/tode/blob/v0.1.2/src/commands/add/controller.ts)_
 
 ## `tode add:model MODEL_NAME`
 
@@ -113,7 +94,6 @@ EXAMPLE
   tode add:model model_name
 ```
 
-_See code: [src/commands/add/model.ts](https://github.com/tode/tode/blob/v0.1.2/src/commands/add/model.ts)_
 
 ## `tode add:resource RESOURCE_NAME`
 
@@ -136,7 +116,6 @@ EXAMPLE
   tode add:resource resource_name
 ```
 
-_See code: [src/commands/add/resource.ts](https://github.com/tode/tode/blob/v0.1.2/src/commands/add/resource.ts)_
 
 ## `tode add:service SERVICE_NAME`
 
@@ -159,27 +138,22 @@ EXAMPLE
   tode add:service service_name
 ```
 
-_See code: [src/commands/add/service.ts](https://github.com/tode/tode/blob/v0.1.2/src/commands/add/service.ts)_
 
-## `tode create-project PROJECT NAME`
+## `tode add:auth`
 
-Scaffolds a fresh Tode project
+adds JWT authentication
 
 ```
 USAGE
-  $ tode create-project PROJECT NAME
-
-ARGUMENTS
-  PROJECT NAME  Name of project to create
+  $ tode add:auth
 
 OPTIONS
   -h, --help  show CLI help
 
-EXAMPLE
-  tode create-project myNewProject
+ALIASES
+  $ tode aa
 ```
 
-_See code: [src/commands/create-project/index.ts](https://github.com/tode/tode/blob/v0.1.2/src/commands/create-project/index.ts)_
 
 ## `tode help [COMMAND]`
 
