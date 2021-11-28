@@ -73,11 +73,12 @@
     "prepack": "rimraf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
     "test": "nyc --extension .ts mocha --forbid-only \"test/**/*.test.ts\"",
     "version": "oclif-dev readme && git add README.md",
-    "generate:readme": "./node_modules/.bin/oclif-dev readme"
+    "generate:readme": "oclif-dev readme"
   },
   "types": "lib/index.d.ts",
-  "description": "tode ====",
+  "description": "CLI tool for scaffolding Node APIs",
   "directories": {
+    "lib": "lib",
     "test": "test"
   }
 }
