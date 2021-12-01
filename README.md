@@ -1,15 +1,27 @@
 **Tode CLI**
 ====
 CLI tool for scaffolding Node API  
-
-[![Version](https://img.shields.io/npm/v/tode.svg)](https://www.npmjs.com/package/tode-cli)
-<!-- [![Downloads/week](https://img.shields.io/npm/dw/tode.svg)](https://npmjs.org/package/tode) -->
-[![License](https://img.shields.io/npm/l/tode.svg)](https://github.com/tode/tode/blob/master/package.json)
+[![Version](https://img.shields.io/npm/v/tode-cli.svg)](https://www.npmjs.com/package/tode-cli)
+[![Downloads/week](https://img.shields.io/npm/dw/tode-cli.svg)](https://npmjs.org/package/tode-cli)
+[![License](https://img.shields.io/npm/l/tode-cli.svg)](https://github.com/taslangraham/tode-cli/blob/main/package.json)
 
 <!-- toc -->
+* [**Features**](#features)
 * [**Usage**](#usage)
 * [**Commands**](#commands)
 * [**Database**](#database)
+
+# **Features**
+* Sccaffolds a NodeJs API project
+* Ability to generate Controllers (routes)
+    * Routes are auto registered when you create a controller (no need for you use ```app.use('..')``` anymore )
+* Ability to Models that maps to database tables
+* Ability to generate Service files
+* Ability to to add JWT based authentication to your app with a single command
+* Comes with Knex.js Built in
+* Comes with an easy to use ORM, [Objection.js](https://vincit.github.io/objection.js/)
+    * Objection.js is built ontop on Knex.js to allow easy database operations
+* 100% Typescript [:wink:]
 
 # **Usage**
 
@@ -28,13 +40,13 @@ $ tode create-project hello-world
 * [`tode add:auth`](#tode-addauth)
 * [`tode help [COMMAND]`](#tode-help-command)
 
-## `tode create-project PROJECT NAME`
+## `tode create-project PROJECT_NAME`
 
 Scaffolds a fresh Tode project
 
 ```
 USAGE
-  $ tode create-project PROJECT NAME
+  $ tode create-project PROJECT_NAME
 
 ARGUMENTS
   PROJECT NAME  Name of project to create
@@ -46,7 +58,7 @@ EXAMPLE
   tode create-project myNewProject
 ```
 
-_See code: [src/commands/create-project/index.ts](https://github.com/tode/tode/blob/v0.1.2/src/commands/create-project/index.ts)_
+
 
 
 
@@ -194,3 +206,53 @@ Tode uses [knex.js](https://knexjs.org/) to create migrations and seeders. All k
 Tode's models are Objection.js models. [Read more here.](https://vincit.github.io/objection.js/guide/models.html).  
 The ``tableName`` property on model holds the name of the table that the model maps to. This property is a requeired property on all models.  
 Model relationships  - https://vincit.github.io/objection.js/guide/relations.html
+Tode uses [knex.js](https://knexjs.org/) to create migrations and seeders. All knex.js commands are available in tode.js.
+## **Configuring Database connection**
+You also need to install one of the following drivers depending on the database you want to use:
+
+```bash
+npm install pg
+npm install sqlite3
+npm install mysql
+npm install mysql2
+```
+Configure Knex connection in the ```knexfile.ts``` file. Read about the ```knexfile``` [here](https://knexjs.org/#knexfile)
+
+```
+export default {
+
+  development: {
+    client: "", //name of the client installed
+    connection: {
+      database: "",
+      user: "",
+      password: "",
+      port: "",
+    },
+    seeds: {
+      directory: 'src\\data-access\\seeds'
+    },
+    migrations: {
+      tableName: "knex_migrations",
+      directory: 'src\\data-access\\migrations',
+    },
+  },
+
+  production: {
+    client: "",
+    connection: {
+      database: "",
+      user: "",
+      password: "",
+    },
+    pool: {
+      min: 2,
+      max: 10,
+    },
+    migrations: {
+      tableName: "",
+    },
+  },
+
+};
+```

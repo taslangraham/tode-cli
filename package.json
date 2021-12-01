@@ -1,12 +1,12 @@
 {
   "name": "tode-cli",
-  "version": "0.1.12",
-  "author": "taslangraham",
+  "version": "0.2.5",
+  "author": "Taslan Graham",
   "bin": {
     "tode": "bin/run"
   },
   "bugs": {
-    "url": "https://github.com/tode/tode/issues"
+    "url": "https://github.com/taslangraham/tode-cli/issues"
   },
   "dependencies": {
     "@oclif/command": "^1.8.0",
@@ -50,9 +50,13 @@
     "/npm-shrinkwrap.json",
     "/oclif.manifest.json"
   ],
-  "homepage": "https://github.com/tode/tode",
+  "homepage": "https://github.com/taslangraham/tode-cli",
   "keywords": [
-    "oclif"
+    "nodejs",
+    "tode-cli",
+    "generate nodejs",
+    "scaffold",
+    "api"
   ],
   "license": "MIT",
   "main": "src/index.js",
@@ -65,7 +69,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tode/tode.git"
+    "url": "https://github.com/taslangraham/tode-cli.git"
   },
   "scripts": {
     "posttest": "eslint . --ext .ts --config .eslintrc",
