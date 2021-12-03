@@ -1,4 +1,3 @@
-import { string } from '@oclif/parser/lib/flags';
 import * as fs from 'fs';
 import * as pathjs from 'path';
 import * as shell from 'shelljs';
@@ -182,7 +181,7 @@ function isRootDirectory(location: string | null = null): boolean {
     }
 
     if (testLocation !== null) {
-      paths = testLocation.split(pathjs.sep)
+      paths = testLocation.split(pathjs.sep);
       if (paths.length > 0 && paths[1] === '') {
         isRoot = true;
       }
