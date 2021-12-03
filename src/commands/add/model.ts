@@ -14,7 +14,6 @@ import {
 import { Driver } from '../../types/driver';
 
 const MODEL_NAME = 'model_name';
-
 export default class Model extends Command {
   public static description = 'adds a new Databse Model';
   public static strict = true;

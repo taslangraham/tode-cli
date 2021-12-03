@@ -1,6 +1,5 @@
 import { Command, flags } from '@oclif/command';
 import chalk = require('chalk');
-import * as rimraf from 'rimraf';
 import * as shell from 'shelljs';
 import { starterTemplateRepo, SUCCESS_EXIT_CODE } from '../../config';
 import { formatFeatureName, isDirectoryExist } from '../../libs';
@@ -41,7 +40,7 @@ export default class CreateProject extends Command {
       throw new Error('Failed to create project. Please ensure you have an internet connection.');
     }
 
-    rimraf.sync(`${projectName}/.git`);
+    await shell.exec(`npx rimraf ${projectName}/.git`);
 
     Log(chalk.green(`Project generated successfully`));
     Log(chalk.green('-------------------------------'));
