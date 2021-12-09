@@ -305,13 +305,16 @@ You can read more here to learn how Objection.js works with knex.js.
 
 ## **Knex.js**
 Tode uses [knex.js](https://knexjs.org/) to create migrations and seeders. All knex.js commands are available in tode.js.
+
 ## **Models**
 Tode's models are Objection.js models. [Read more here.](https://vincit.github.io/objection.js/guide/models.html).  
+
 The ``tableName`` property on model holds the name of the table that the model maps to. This property is a requeired property on all models.  
 Model relationships  - https://vincit.github.io/objection.js/guide/relations.html
 Tode uses [knex.js](https://knexjs.org/) to create migrations and seeders. All knex.js commands are available in tode.js.
+
 ## **Configuring Database connection**
-You also need to install one of the following drivers depending on the database you want to use:
+### **Install one of the following drivers depending on the database you want to use**
 
 ```bash
 npm install pg
@@ -319,47 +322,21 @@ npm install sqlite3
 npm install mysql
 npm install mysql2
 ```
-**Note: The ```pg``` client comes as the default**.  
-Configure Knex connection in the ```knexfile.ts``` file. Read about the ```knexfile``` [here](https://knexjs.org/#knexfile)
+**Note: The ```pg``` client comes installed by default**.  
 
-```
-export default {
+### **Add the following varibales to your `.env` file** 
+* `IS_DB_ENABLED` # set this to `true`
+* `DB_NAME`
+* `DB_CLIENT`
+* `DB_PORT`
+* `DB_PASSWORD`
+* `DB_USER`
 
-  development: {
-    client: "", //name of the client installed
-    connection: {
-      database: "",
-      user: "",
-      password: "",
-      port: "",
-    },
-    seeds: {
-      directory: 'src\\data-access\\seeds'
-    },
-    migrations: {
-      tableName: "knex_migrations",
-      directory: 'src\\data-access\\migrations',
-    },
-  },
+Behind the scenes todes uses these values to configure a Knex.js connection. You can see the configuration in `'src/config/database/db-config.ts'`.
 
-  production: {
-    client: "",
-    connection: {
-      database: "",
-      user: "",
-      password: "",
-    },
-    pool: {
-      min: 2,
-      max: 10,
-    },
-    migrations: {
-      tableName: "",
-    },
-  },
+Read about the knex.js' config [here](https://knexjs.org/#knexfile). Instead of creating a `knexfile`, tode-cli creates the config object on the fly when setting up the knex.js configuration.
 
-};
-```
+
 
 # **Auto Registered Routes**
 Route files are refered to as 'controllers' in tode-cli. It is common to have to manually register all your routes like
