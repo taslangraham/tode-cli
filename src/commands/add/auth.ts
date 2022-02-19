@@ -49,7 +49,7 @@ export default class Auth extends Command {
    * Create migrations for auth
    */
   private addMigration() {
-    const USERS_TABLE_MIGRATION = 'knex migrate:make user x ts';
+    const USERS_TABLE_MIGRATION = 'npx knex migrate:make user x ts';
     const MIGRATION_FOLDER = `src/data-access/migrations/`;
     // Get contents that should go into Migration for users table
     const userMigration = getFile(`${getProjectRoot()}.tode/.template/auth/migration.ts`);
