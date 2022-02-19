@@ -1,3 +1,6 @@
+/**
+ * Auth command
+ */
 import { Command, flags } from '@oclif/command';
 import * as chalk from 'chalk';
 import cli from 'cli-ux';
@@ -5,6 +8,7 @@ import * as  mkdirp from 'mkdirp';
 import { exec } from 'shelljs';
 
 import {
+  appendFile,
   copyFile,
   getFile,
   getLastFileInFolder,
@@ -25,15 +29,16 @@ export default class Auth extends Command {
   };
 
   public static aliases = ['aa'];
-  private driver: Driver = getTemplateDriver(`auth`);
+  private driver: Driver = getTemplateDriver('auth');
 
   public async run() {
     const { driver } = this;
     // Copy each file defined in the files section of the driver
     this.copyAuthFiles(driver.files);
+    this.addRoutes('src/routes/index.ts', driver?.routes || []);
 
     // Add Migration file
-    cli.action.start(`Adding Migrations`);
+    cli.action.start('Adding Migrations');
     this.addMigration();
     cli.action.stop();
 
@@ -49,8 +54,8 @@ export default class Auth extends Command {
    * Create migrations for auth
    */
   private addMigration() {
-    const USERS_TABLE_MIGRATION = 'knex migrate:make user x ts';
-    const MIGRATION_FOLDER = `src/data-access/migrations/`;
+    const USERS_TABLE_MIGRATION = 'npx knex migrate:make user x ts';
+    const MIGRATION_FOLDER = 'src/data-access/migrations/';
     // Get contents that should go into Migration for users table
     const userMigration = getFile(`${getProjectRoot()}.tode/.template/auth/migration.ts`);
     // Create new(partially empty) migration file
@@ -67,9 +72,9 @@ export default class Auth extends Command {
   }
 
   /**
-   *
-   * @param dependencies
-   * @param devDependencies
+   * @description Install authdependencies.
+   * @param {string[]} dependencies - required dependencies
+   * @param {string[]} devDependencies - dev dependencies for auth
    */
   private installDepencencies(dependencies: string[], devDependencies: string[]) {
     const totalDependencies = dependencies.length + devDependencies.length;
@@ -103,6 +108,16 @@ export default class Auth extends Command {
       }
 
       this.log(`${chalk.green(`Added - ${chalk.yellow(`${file.destination.replace('src/', '')}`)}`)}`);
+    }
+  }
+
+  private addRoutes(destination: string, routes: string[]) {
+    const content = routes?.reduce((prev, current) => {
+      return prev + '\n' + current;
+    }, '');
+
+    if (content !== '') {
+      appendFile(`${getProjectRoot()}${destination}`, content);
     }
   }
 }
