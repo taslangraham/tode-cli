@@ -20,12 +20,14 @@ import { Driver, DriverFile } from '../../types/driver';
  */
 export default class Auth extends Command {
   public static description = 'adds JWT authentication';
+
   public static flags = {
     help: flags.help({ char: 'h' }),
   };
 
   public static aliases = ['aa'];
-  private driver: Driver = getTemplateDriver(`auth`);
+
+  private driver: Driver = getTemplateDriver('auth');
 
   public async run() {
     const { driver } = this;
@@ -33,7 +35,7 @@ export default class Auth extends Command {
     this.copyAuthFiles(driver.files);
 
     // Add Migration file
-    cli.action.start(`Adding Migrations`);
+    cli.action.start('Adding Migration');
     this.addMigration();
     cli.action.stop();
 
@@ -50,7 +52,7 @@ export default class Auth extends Command {
    */
   private addMigration() {
     const USERS_TABLE_MIGRATION = 'npx knex migrate:make user x ts';
-    const MIGRATION_FOLDER = `src/data-access/migrations/`;
+    const MIGRATION_FOLDER = 'src/database/migrations/';
     // Get contents that should go into Migration for users table
     const userMigration = getFile(`${getProjectRoot()}.tode/.template/auth/migration.ts`);
     // Create new(partially empty) migration file
@@ -68,8 +70,8 @@ export default class Auth extends Command {
 
   /**
    *
-   * @param dependencies
-   * @param devDependencies
+   * @param {string[]} dependencies Dependencies
+   * @param {string[]} devDependencies Dependencies for Dev development
    */
   private installDepencencies(dependencies: string[], devDependencies: string[]) {
     const totalDependencies = dependencies.length + devDependencies.length;
