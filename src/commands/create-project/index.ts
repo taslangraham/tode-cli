@@ -1,6 +1,5 @@
 import { Command, flags } from '@oclif/command';
 import chalk = require('chalk');
-import rimraf = require('rimraf');
 import * as shell from 'shelljs';
 import { starterTemplateRepo, SUCCESS_EXIT_CODE } from '../../config';
 import { formatFeatureName, isDirectoryExist } from '../../libs';
