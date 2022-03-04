@@ -147,7 +147,7 @@ EXAMPLE
   tode add:model model_name
 ```
 
-Example - ```$ tode add:model example ```  
+Example - ```$ tode add:model example ```
 ```javascript
 import BaseModel from "../BaseMode";
 
@@ -258,13 +258,13 @@ OPTIONS
 ALIASES
   $ tode aa
 ```
-### Modules generated:  
+### Modules generated:
 Controller - ```controllers/auth```  
-Model - ```models/user```    
+Model - ```models/user```
 Services - ```services/auth```, ```services/user```  
 Middlewares - ```middlewares/auth```,  
 
-### **Execute migration**   
+### **Execute migration**
 The necessary migration file to create a Users table in the database is also generated. Run the following command to create the Users table.
 ```bash
 knex migrate:latest
@@ -297,7 +297,7 @@ Even though ORM is the best commonly known acronym to describe objection, a more
 
 Objection.js is built on an SQL query builder called knex. All databases supported by knex are supported by objection.js. SQLite3, Postgres and MySQL are thoroughly tested.  
 
-   
+
 The underlying databse connection is setup up using Knex.js, and the top level ORM functionalities are done using Objection.js.  
 
 You can read more here to learn how Objection.js works with knex.js.  
@@ -324,7 +324,7 @@ npm install mysql2
 ```
 **Note: The ```pg``` client comes installed by default**.  
 
-### **Add the following varibales to your `.env` file** 
+### **Add the following varibales to your `.env` file**
 * `IS_DB_ENABLED` # set this to `true`
 * `DB_NAME`
 * `DB_CLIENT`
