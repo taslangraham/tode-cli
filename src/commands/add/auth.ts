@@ -24,6 +24,7 @@ import { Driver, DriverFile } from '../../types/driver';
  */
 export default class Auth extends Command {
   public static description = 'adds JWT authentication';
+
   public static flags = {
     help: flags.help({ char: 'h' }),
   };
@@ -38,12 +39,12 @@ export default class Auth extends Command {
     this.addRoutes('src/routes/index.ts', driver?.routes || []);
 
     // Add Migration file
-    cli.action.start('Adding Migrations');
+    cli.action.start('Adding Migration');
     this.addMigration();
     cli.action.stop();
 
     // Install dependecies
-    this.installDepencencies(driver.dependencies, driver.devDependencies);
+    this.installDependencies(driver.dependencies, driver.devDependencies);
   }
 
   public async catch(error: Error) {
@@ -55,7 +56,7 @@ export default class Auth extends Command {
    */
   private addMigration() {
     const USERS_TABLE_MIGRATION = 'npx knex migrate:make user x ts';
-    const MIGRATION_FOLDER = 'src/data-access/migrations/';
+    const MIGRATION_FOLDER = 'src/database/migrations/';
     // Get contents that should go into Migration for users table
     const userMigration = getFile(`${getProjectRoot()}.tode/.template/auth/migration.ts`);
     // Create new(partially empty) migration file
@@ -72,11 +73,11 @@ export default class Auth extends Command {
   }
 
   /**
-   * @description Install authdependencies.
-   * @param {string[]} dependencies - required dependencies
-   * @param {string[]} devDependencies - dev dependencies for auth
+   *
+   * @param {string[]} dependencies Dependencies
+   * @param {string[]} devDependencies Dependencies for Dev development
    */
-  private installDepencencies(dependencies: string[], devDependencies: string[]) {
+  private installDependencies(dependencies: string[], devDependencies: string[]) {
     const totalDependencies = dependencies.length + devDependencies.length;
     let current = 0;
 
