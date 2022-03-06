@@ -1,7 +1,7 @@
 **Tode CLI**
 ====
+Tode is a CLI that wraps around the popular express.js. It is a tool that provides a scaffolded approach to building node.js/express.js APIs. The Tode CLI comes packed with features that aims to speed up your development with node/express.js.
 
-CLI tool for scaffolding Node API. Suitable for projects that requires a database.  
 [![Version](https://img.shields.io/npm/v/tode-cli.svg)](https://www.npmjs.com/package/tode-cli)
 [![Downloads/week](https://img.shields.io/npm/dw/tode-cli.svg)](https://npmjs.org/package/tode-cli)
 [![License](https://img.shields.io/npm/l/tode-cli.svg)](https://github.com/taslangraham/tode-cli/blob/main/package.json)
@@ -10,22 +10,23 @@ CLI tool for scaffolding Node API. Suitable for projects that requires a databas
 * [**Features**](#features)
 * [**Usage**](#usage)
 * [**Commands**](#commands)
+* [**Routes**](#routes)
+* [**Middleware**](#middleware)
 * [**Database**](#database)
-* [**Auto Registered Routes**](#auto-registered-routes)
 <!-- tocstop -->
 
 # **Features**
 
-* Sccaffolds a NodeJs API project
-* Ability to generate Controllers (routes)
-  * Routes are auto registered when you create a controller (no need for you use ```app.use(<PATH>, <ROUTER-MODULE>)``` anymore )
+* Scaffolds a Node.js/express.js API project
+* Ability to generate Controllers
 * Ability to generate Models that maps to database tables
 * Ability to generate Service files
 * Ability to to add JWT based authentication to your app with a single command
 * Comes with Knex.js Built in
 * Comes with an easy to use ORM, [Objection.js](https://vincit.github.io/objection.js/)
   * Objection.js is built on top of Knex.js to allow easy database operations
-* Self documenting API
+* Easy middleware creation
+* Easily register controllers to your routes
 * 100% Typescript :wink:
 
 # **Usage**
@@ -37,11 +38,11 @@ tode create-project hello-world
 <!-- usagestop -->
 # **Commands**
 <!-- commands -->
-* [`tode create-project PROJECT NAME`](#tode-create-project-project_name)
-* [`tode add:controller CONTROLLER_NAME`](#tode-addcontroller-controller_name)
-* [`tode add:model MODEL_NAME`](#tode-addmodel-model_name)
-* [`tode add:service SERVICE_NAME`](#tode-addservice-service_name)
-* [`tode add:resource RESOURCE_NAME`](#tode-addresource-resource_name)
+* [`tode create-project <name>`](#tode-create-project-project_name)
+* [`tode add:controller <name>`](#tode-addcontroller-controller_name)
+* [`tode add:model <name>`](#tode-addmodel-model_name)
+* [`tode add:service <name>`](#tode-addservice-service_name)
+* [`tode add:resource <name>`](#tode-addresource-resource_name)
 * [`tode add:auth`](#tode-addauth)
 * [`tode help [COMMAND]`](#tode-help-command)
 
@@ -103,8 +104,8 @@ export async function update(request: Request, response: Response) { }
 export async function destroy(request: Request, response: Response) { }
 ```
 
-Controllers are methods that handles the HTTP request for the routes defined inside the ```typescript
-src/routes/index.ts```.
+Controllers are methods that handles the HTTP request for the routes defined inside the ```
+src/routes/index.ts``` file.
 Each controller method accepts a request context, ```request```, and a response context, ```response```.
 
 The ```request``` context extends express.js' response context, and adds an ```Auth``` property which provides details of the authenticated user if authentication is active within the application.
@@ -259,7 +260,7 @@ ALIASES
 Controller - ```controllers/auth```  
 Model - ```models/user```
 Services - ```services/auth```, ```services/user```  
-Middlewares - ```middlewares/auth```,  
+Middlewares - ```middlewares/auth```
 
 ### **Execute migration**
 
@@ -367,7 +368,7 @@ import { Router } from '../config/core';
 Then create your routes:
 ```typescript
 const newsRouter = Router();
-newsRouter.get('/', async (request: Request, response: Response)=>{});
+newsRouter.get('/', async (request: Request, response: Response)=> {});
 App.use('/news', newsRouter);
 ```
 Apply middleware to router
@@ -375,7 +376,7 @@ Apply middleware to router
 const newsRouter = Router();
 newsRouter.use(withMiddleware('example'));
 
-newsRouter.get('/', async (request: Request, response: Response)=>{});
+newsRouter.get('/', async (request: Request, response: Response)=> {});
 App.use('/news', newsRouter);
 ```
 Read more about express.js' routing [here](https://expressjs.com/en/guide/routing.html).
@@ -431,6 +432,8 @@ App.get('posts', withMiddleware('auth'), async (request: Request,response: Respo
 ```
 **Note:  you apply application level middlewares inside ```initialize()``` method in the```src/app.ts``` file.**
 
+Read more about [express.js middleware](https://expressjs.com/en/guide/using-middleware.html).
+
 
 # **Database**
 
@@ -482,6 +485,6 @@ npm install mysql2
 * `DB_PASSWORD`
 * `DB_USER`
 
-Behind the scenes todes uses these values to configure a Knex.js connection. You can see the configuration in `'src/config/database/db-config.ts'`.
+Behind the scenes tode's uses these values to configure a Knex.js connection. You can see the configuration in `src/config/database/db-config.ts`.
 
 Read about the knex.js' config [here](https://knexjs.org/#knexfile). Instead of creating a `knexfile`, tode-cli creates the config object on the fly when setting up the knex.js configuration.
