@@ -485,6 +485,6 @@ npm install mysql2
 * `DB_PASSWORD`
 * `DB_USER`
 
-Behind the scenes tode's uses these values to configure a Knex.js connection. You can see the configuration in `src/config/database/db-config.ts`.
+Behind the scenes tode uses these values to configure a Knex.js connection. You can see the configuration in `src/config/database/db-config.ts`.
 
 Read about the knex.js' config [here](https://knexjs.org/#knexfile). Instead of creating a `knexfile`, tode-cli creates the config object on the fly when setting up the knex.js configuration.
