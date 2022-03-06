@@ -4,6 +4,7 @@ export interface Driver {
   files: DriverFile[];
   dependencies: string[];
   devDependencies: string[];
+  routes?: string[];
 }
 
 export interface DriverFile {

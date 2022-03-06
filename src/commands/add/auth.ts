@@ -1,3 +1,6 @@
+/**
+ * Auth command
+ */
 import { Command, flags } from '@oclif/command';
 import * as chalk from 'chalk';
 import cli from 'cli-ux';
@@ -5,6 +8,7 @@ import * as  mkdirp from 'mkdirp';
 import { exec } from 'shelljs';
 
 import {
+  appendFile,
   copyFile,
   getFile,
   getLastFileInFolder,
@@ -26,13 +30,13 @@ export default class Auth extends Command {
   };
 
   public static aliases = ['aa'];
-
   private driver: Driver = getTemplateDriver('auth');
 
   public async run() {
     const { driver } = this;
     // Copy each file defined in the files section of the driver
     this.copyAuthFiles(driver.files);
+    this.addRoutes('src/routes/index.ts', driver?.routes || []);
 
     // Add Migration file
     cli.action.start('Adding Migration');
@@ -40,7 +44,7 @@ export default class Auth extends Command {
     cli.action.stop();
 
     // Install dependecies
-    this.installDepencencies(driver.dependencies, driver.devDependencies);
+    this.installDependencies(driver.dependencies, driver.devDependencies);
   }
 
   public async catch(error: Error) {
@@ -73,7 +77,7 @@ export default class Auth extends Command {
    * @param {string[]} dependencies Dependencies
    * @param {string[]} devDependencies Dependencies for Dev development
    */
-  private installDepencencies(dependencies: string[], devDependencies: string[]) {
+  private installDependencies(dependencies: string[], devDependencies: string[]) {
     const totalDependencies = dependencies.length + devDependencies.length;
     let current = 0;
 
@@ -105,6 +109,16 @@ export default class Auth extends Command {
       }
 
       this.log(`${chalk.green(`Added - ${chalk.yellow(`${file.destination.replace('src/', '')}`)}`)}`);
+    }
+  }
+
+  private addRoutes(destination: string, routes: string[]) {
+    const content = routes?.reduce((prev, current) => {
+      return prev + '\n' + current;
+    }, '');
+
+    if (content !== '') {
+      appendFile(`${getProjectRoot()}${destination}`, content);
     }
   }
 }
