@@ -7,13 +7,7 @@ import { rootDir } from '../settings';
 import { Driver } from '../types/driver';
 import { FileOperationRespose } from '../types/files';
 
-/**
- * Returns the driver file of a template
- * @param templateName Name of template folder
- */
-export function getTemplateDriver(templateName: string) {
-  return require(`${getProjectRoot()}.tode\\.template\\${templateName}\\driver.json`) as Driver;
-}
+
 
 /**
  * Returns the driver file of a template
@@ -21,11 +15,12 @@ export function getTemplateDriver(templateName: string) {
  */
 export function getLastFileInFolder(folderPath: string) {
   // return require(`${getProjectRoot()}folderPath`);
-  const files = orderReccentFiles(folderPath);
-  return files.length ? files[0] : undefined;
+
+  const files = orderRecentFiles(folderPath);
+  return files.length > 0 ? files[0] : undefined;
 }
 
-function orderReccentFiles(dir: string) {
+function orderRecentFiles(dir: string) {
   return fs.readdirSync(dir)
     .filter((file) => fs.lstatSync(pathjs.join(dir, file)).isFile())
     .map((file) => ({ file, mtime: fs.lstatSync(pathjs.join(dir, file)).mtime }))
@@ -37,7 +32,7 @@ function orderReccentFiles(dir: string) {
  * @param path Path to create Folder
  * @param overwrite Replace folder and its contents if folder already exists
  */
-export function createFolder(path: string, overwrite: boolean = false) {
+export function createFolder(path: string, overwrite = false) {
   const result = {} as FileOperationRespose;
   let isAlreadyExist = isExist(path);
 
@@ -167,7 +162,6 @@ export function kebabToCamelCase(rawString: string) {
   return camelCase;
 }
 
-
 /**
  * Description: determine if is root directory of rdvue project
  */
@@ -186,7 +180,7 @@ function isRootDirectory(location: string | null = null): boolean {
         isRoot = true;
       }
     }
-  } catch (e) {
+  } catch (error) {
     // tslint:disable-next-line:no-console
     throw new Error('Error checking root directory');
   }
@@ -224,4 +218,16 @@ export function getProjectRoot() {
   }
 
   return projectRoot;
+}
+
+/**
+ * Returns the driver file of a template
+ * @param templateName Name of template folder
+ */
+export function getTemplateDriver(templateName: string) {
+  return require(`${getProjectRoot()}.tode\\.template\\${templateName}\\driver.json`) as Driver;
+}
+
+export function appendFile(path: string, content: string) {
+  fs.appendFileSync(path, content);
 }

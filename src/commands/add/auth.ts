@@ -1,3 +1,6 @@
+/**
+ * Auth command
+ */
 import { Command, flags } from '@oclif/command';
 import * as chalk from 'chalk';
 import cli from 'cli-ux';
@@ -5,6 +8,7 @@ import * as  mkdirp from 'mkdirp';
 import { exec } from 'shelljs';
 
 import {
+  appendFile,
   copyFile,
   getFile,
   getLastFileInFolder,
@@ -20,25 +24,27 @@ import { Driver, DriverFile } from '../../types/driver';
  */
 export default class Auth extends Command {
   public static description = 'adds JWT authentication';
+
   public static flags = {
     help: flags.help({ char: 'h' }),
   };
 
   public static aliases = ['aa'];
-  private driver: Driver = getTemplateDriver(`auth`);
+  private driver: Driver = getTemplateDriver('auth');
 
   public async run() {
     const { driver } = this;
     // Copy each file defined in the files section of the driver
     this.copyAuthFiles(driver.files);
+    this.addRoutes('src/routes/index.ts', driver?.routes || []);
 
     // Add Migration file
-    cli.action.start(`Adding Migrations`);
+    cli.action.start('Adding Migration');
     this.addMigration();
     cli.action.stop();
 
     // Install dependecies
-    this.installDepencencies(driver.dependencies, driver.devDependencies);
+    this.installDependencies(driver.dependencies, driver.devDependencies);
   }
 
   public async catch(error: Error) {
@@ -50,7 +56,7 @@ export default class Auth extends Command {
    */
   private addMigration() {
     const USERS_TABLE_MIGRATION = 'npx knex migrate:make user x ts';
-    const MIGRATION_FOLDER = `src/data-access/migrations/`;
+    const MIGRATION_FOLDER = 'src/database/migrations/';
     // Get contents that should go into Migration for users table
     const userMigration = getFile(`${getProjectRoot()}.tode/.template/auth/migration.ts`);
     // Create new(partially empty) migration file
@@ -68,10 +74,10 @@ export default class Auth extends Command {
 
   /**
    *
-   * @param dependencies
-   * @param devDependencies
+   * @param {string[]} dependencies Dependencies
+   * @param {string[]} devDependencies Dependencies for Dev development
    */
-  private installDepencencies(dependencies: string[], devDependencies: string[]) {
+  private installDependencies(dependencies: string[], devDependencies: string[]) {
     const totalDependencies = dependencies.length + devDependencies.length;
     let current = 0;
 
@@ -103,6 +109,16 @@ export default class Auth extends Command {
       }
 
       this.log(`${chalk.green(`Added - ${chalk.yellow(`${file.destination.replace('src/', '')}`)}`)}`);
+    }
+  }
+
+  private addRoutes(destination: string, routes: string[]) {
+    const content = routes?.reduce((prev, current) => {
+      return prev + '\n' + current;
+    }, '');
+
+    if (content !== '') {
+      appendFile(`${getProjectRoot()}${destination}`, content);
     }
   }
 }
