@@ -1,6 +1,6 @@
 {
   "name": "tode-cli",
-  "version": "0.2.17",
+  "version": "1.0.0-alpha",
   "author": "Taslan Graham",
   "bin": {
     "tode": "bin/run"
