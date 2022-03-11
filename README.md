@@ -14,14 +14,6 @@ Tode is a CLI that wraps around the popular express.js. It is a tool that provid
 * [Routes](#routes)
 * [Middleware](#middleware)
 * [**Database**](#database)
-<!-- tocstop -->
-* [**Features**](#features)
-* [**Usage**](#usage)
-* [**Commands**](#commands)
-* [**Routes**](#routes)
-* [**Middleware**](#middleware)
-* [**Database**](#database)
-<!-- tocstop -->
 
 # **Features**
 
@@ -33,7 +25,7 @@ Tode is a CLI that wraps around the popular express.js. It is a tool that provid
 * Comes with Knex.js Built in
 * Comes with an easy to use ORM, [Objection.js](https://vincit.github.io/objection.js/)
   * Objection.js is built on top of Knex.js to allow easy database operations
-* Easy middleware creation
+* Easy middleware creation and usage
 * Easily register controllers to your routes
 * 100% Typescript :wink:
 
@@ -74,8 +66,6 @@ OPTIONS
   -h, --help  show CLI help
 ```
 
-_See code: [src/commands/add/index.ts](https://github.com/taslangraham/tode-cli/blob/v1.0.0-alpha/src/commands/add/index.ts)_
-
 ## `tode add:auth`
 
 adds JWT authentication
@@ -90,8 +80,6 @@ OPTIONS
 ALIASES
   $ tode aa
 ```
-
-_See code: [src/commands/add/auth.ts](https://github.com/taslangraham/tode-cli/blob/v1.0.0-alpha/src/commands/add/auth.ts)_
 
 ## `tode add:controller CONTROLLER_NAME`
 
@@ -114,8 +102,6 @@ EXAMPLE
   tode add:controller <controller_name>
 ```
 
-_See code: [src/commands/add/controller.ts](https://github.com/taslangraham/tode-cli/blob/v1.0.0-alpha/src/commands/add/controller.ts)_
-
 ## `tode add:model MODEL_NAME`
 
 adds a new Databse Model
@@ -137,7 +123,6 @@ EXAMPLE
   tode add:model model_name
 ```
 
-_See code: [src/commands/add/model.ts](https://github.com/taslangraham/tode-cli/blob/v1.0.0-alpha/src/commands/add/model.ts)_
 
 ## `tode add:resource RESOURCE_NAME`
 
@@ -160,7 +145,6 @@ EXAMPLE
   tode add:resource resource_name
 ```
 
-_See code: [src/commands/add/resource.ts](https://github.com/taslangraham/tode-cli/blob/v1.0.0-alpha/src/commands/add/resource.ts)_
 
 ## `tode add:service SERVICE_NAME`
 
@@ -183,7 +167,6 @@ EXAMPLE
   tode add:service service_name
 ```
 
-_See code: [src/commands/add/service.ts](https://github.com/taslangraham/tode-cli/blob/v1.0.0-alpha/src/commands/add/service.ts)_
 
 ## `tode create-project PROJECT NAME`
 
@@ -203,7 +186,6 @@ EXAMPLE
   tode create-project myNewProject
 ```
 
-_See code: [src/commands/create-project/index.ts](https://github.com/taslangraham/tode-cli/blob/v1.0.0-alpha/src/commands/create-project/index.ts)_
 
 ## `tode help [COMMAND]`
 
@@ -220,7 +202,6 @@ OPTIONS
   --all  see all commands in CLI
 ```
 
-_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.2.2/src/commands/help.ts)_
 <!-- commandsstop -->
 * [`tode create-project <name>`](#tode-create-project-project_name)
 * [`tode add:controller <name>`](#tode-addcontroller-controller_name)
@@ -329,7 +310,7 @@ export class Example extends BaseModel {
 
 Tode uses [Objection.js](https://vincit.github.io/objection.js/) as the ORM. The models created are objection.js models.  
 **Note: The ```tableName``` property nust be the name of an actual table in your database**.  
-Read more about [**Tode-cli database setup**](#database).
+Read more about [Tode-cli database setup](#database).
 
 ## `tode add:service SERVICE_NAME`
 

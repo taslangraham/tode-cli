@@ -40,8 +40,12 @@ export default class CreateProject extends Command {
       throw new Error('Failed to create project. Please ensure you have an internet connection.');
     }
 
-    await shell.exec(`npx rimraf ${projectName}/.git`);
-    Log(chalk.green(`Project generated successfully`));
+    shell.exec(`npx rimraf ${projectName}/.git`);
+    shell.cd(`${projectName}/`);
+    shell.cp('.env.example', '.env');
+    shell.exec('npx rimraf .env.example');
+
+    Log(chalk.green('Project generated successfully'));
     Log(chalk.green('-------------------------------'));
     Log(`run 'cd ${chalk.yellow(projectName)}' to enter project folder`);
   }
