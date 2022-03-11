@@ -104,9 +104,6 @@ export async function update(request: Request, response: Response) { }
 export async function destroy(request: Request, response: Response) { }
 ```
 
-
-
-
 ## `tode add:model MODEL_NAME`
 
 adds a new Databse Model
@@ -455,7 +452,6 @@ App.get('posts', withMiddleware('auth'), async (request: Request,response: Respo
 **Note:  you apply application level middlewares inside ```initialize()``` method in the```src/app.ts``` file.**
 
 Read more about [express.js middleware](https://expressjs.com/en/guide/using-middleware.html).
-
 
 # **Database**
 
