@@ -104,24 +104,8 @@ export async function update(request: Request, response: Response) { }
 export async function destroy(request: Request, response: Response) { }
 ```
 
-Controllers are methods that handles the HTTP request for the routes defined inside the ```
-src/routes/index.ts``` file.
-Each controller method accepts a request context, ```request```, and a response context, ```response```.
 
-The ```request``` context extends express.js' response context, and adds an ```Auth``` property which provides details of the authenticated user if authentication is active within the application.
 
-The ```response``` context is the regular express.js response context.
-
-The ```Auth``` object holds the following properties:
-
-```typescript
-{
-    id: string,
-    email: string;
-    firstName: string;
-    lastName: string;
-}
-```
 
 ## `tode add:model MODEL_NAME`
 
@@ -164,7 +148,7 @@ export class Example extends BaseModel {
 
 Tode uses [Objection.js](https://vincit.github.io/objection.js/) as the ORM. The models created are objection.js models.  
 **Note: The ```tableName``` property nust be the name of an actual table in your database**.  
-Read more about [**Tode-cli database setup**](#database)
+Read more about [**Tode-cli database setup**](#database).
 
 ## `tode add:service SERVICE_NAME`
 
@@ -285,10 +269,48 @@ OPTIONS
   --all  see all commands in CLI
 ```
 
+# Controllers
+Controllers are methods that handles the HTTP request for the routes defined inside the ```
+src/routes/index.ts``` file.
+
+```typescript
+import { Request, Response } from "../../config/core";
+
+export async function index(request: Request, response: Response) { }
+
+export async function store(request: Request, response: Response) { }
+
+export async function show(request: Request, response: Response) { }
+
+export async function edit(request: Request, response: Response) { }
+
+export async function update(request: Request, response: Response) { }
+
+export async function destroy(request: Request, response: Response) { }
+```
+
+
+Each controller method accepts a request context, ```request```, and a response context, ```response```.
+
+The ```request``` context extends express.js' response context, and adds an ```Auth``` property which provides details of the authenticated user if authentication is active within the application.
+
+The ```response``` context is the regular express.js response context.
+
+The ```Auth``` object holds the following properties:
+
+```typescript
+{
+    id: string,
+    email: string;
+    firstName: string;
+    lastName: string;
+}
+```
+
 # Routes
 The users of your website or web application can visit various URLS like ```/articles```, ```/posts```. To make these URLs available you will have to define them as routes.
 
-You define routes inside ```src/routes.ts``` file using the App module(which is instance of of the underlying express app).
+You define routes inside ```src/routes.ts``` file using the ```App``` module(which is instance of of the underlying express app).
 
 A route typically accepts the route pattern as the first argument and route handler as the second argument. For example:
 
@@ -371,7 +393,7 @@ const newsRouter = Router();
 newsRouter.get('/', async (request: Request, response: Response)=> {});
 App.use('/news', newsRouter);
 ```
-Apply middleware to router
+#### Apply middleware to router
 ```typescript
 const newsRouter = Router();
 newsRouter.use(withMiddleware('example'));
@@ -393,7 +415,7 @@ Middleware functions can perform the following tasks:
 - End the request-response cycle.
 - Call the next middleware function in the stack.
 
-If the current middleware function does not end the request-response cycle, it must call next() to pass control to the next middleware function. Otherwise, the request will be left hanging.
+If the current middleware function does not end the request-response cycle, it must call ```next()``` to pass control to the next middleware function. Otherwise, the request will be left hanging.
 
 ## Creating middlewares
 You create your middlewares inside designated files in the ```src/middlewares``` folder. Here's an example middleware called 'example':
@@ -411,14 +433,14 @@ export default class Example{
 }
 ```
 
-You the register you middleware inside the ```src/middlewares/index.ts``` file. For example:
+You then register your middleware inside the ```src/middlewares/index.ts``` file. For example:
 
 First, import your middleware
 ```typescript
-// scr/middlewares/index.ts
+// src/middlewares/index.ts
 import Example from './example';
 ```
-Then register it buy adding it to the ```middleware``` constant.
+Then register it by adding it to the ```middleware``` constant.
 ```typescript
 const middleware = {
   // ......,
