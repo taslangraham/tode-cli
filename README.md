@@ -10,10 +10,10 @@ Tode is a CLI that wraps around the popular express.js. It is a tool that provid
 * [**Features**](#features)
 * [**Usage**](#usage)
 * [**Commands**](#commands)
-* [**Routes**](#routes)
-* [**Middleware**](#middleware)
+* [Controllers](#controllers)
+* [Routes](#routes)
+* [Middleware](#middleware)
 * [**Database**](#database)
-<!-- tocstop -->
 
 # **Features**
 
@@ -25,7 +25,7 @@ Tode is a CLI that wraps around the popular express.js. It is a tool that provid
 * Comes with Knex.js Built in
 * Comes with an easy to use ORM, [Objection.js](https://vincit.github.io/objection.js/)
   * Objection.js is built on top of Knex.js to allow easy database operations
-* Easy middleware creation
+* Easy middleware creation and usage
 * Easily register controllers to your routes
 * 100% Typescript :wink:
 
@@ -38,6 +38,171 @@ tode create-project hello-world
 <!-- usagestop -->
 # **Commands**
 <!-- commands -->
+* [`tode add [CONTROLLER] [MODEL] [SERVICE] [RESOURCE] [AUTH]`](#tode-add-controller-model-service-resource-auth)
+* [`tode add:auth`](#tode-addauth)
+* [`tode add:controller CONTROLLER_NAME`](#tode-addcontroller-controller_name)
+* [`tode add:model MODEL_NAME`](#tode-addmodel-model_name)
+* [`tode add:resource RESOURCE_NAME`](#tode-addresource-resource_name)
+* [`tode add:service SERVICE_NAME`](#tode-addservice-service_name)
+* [`tode create-project PROJECT NAME`](#tode-create-project-project-name)
+* [`tode help [COMMAND]`](#tode-help-command)
+
+## `tode add [CONTROLLER] [MODEL] [SERVICE] [RESOURCE] [AUTH]`
+
+add a new project module
+
+```
+USAGE
+  $ tode add [CONTROLLER] [MODEL] [SERVICE] [RESOURCE] [AUTH]
+
+ARGUMENTS
+  CONTROLLER  Adds a controller to the application
+  MODEL       adds a new Databse Model
+  SERVICE     adds a new service
+  RESOURCE    adds a complete resource (mode, controller, service
+  AUTH        adds JWT authentication
+
+OPTIONS
+  -h, --help  show CLI help
+```
+
+## `tode add:auth`
+
+adds JWT authentication
+
+```
+USAGE
+  $ tode add:auth
+
+OPTIONS
+  -h, --help  show CLI help
+
+ALIASES
+  $ tode aa
+```
+
+## `tode add:controller CONTROLLER_NAME`
+
+Adds a controller to the application
+
+```
+USAGE
+  $ tode add:controller CONTROLLER_NAME
+
+ARGUMENTS
+  CONTROLLER_NAME  Name of controller to create
+
+OPTIONS
+  -h, --help  show CLI help
+
+ALIASES
+  $ tode ac
+
+EXAMPLE
+  tode add:controller <controller_name>
+```
+
+## `tode add:model MODEL_NAME`
+
+adds a new Databse Model
+
+```
+USAGE
+  $ tode add:model MODEL_NAME
+
+ARGUMENTS
+  MODEL_NAME  Name of model to create
+
+OPTIONS
+  -h, --help  show CLI help
+
+ALIASES
+  $ tode am
+
+EXAMPLE
+  tode add:model model_name
+```
+
+
+## `tode add:resource RESOURCE_NAME`
+
+adds a complete resource (mode, controller, service
+
+```
+USAGE
+  $ tode add:resource RESOURCE_NAME
+
+ARGUMENTS
+  RESOURCE_NAME  Name of resource to create
+
+OPTIONS
+  -h, --help  show CLI help
+
+ALIASES
+  $ tode rs
+
+EXAMPLE
+  tode add:resource resource_name
+```
+
+
+## `tode add:service SERVICE_NAME`
+
+adds a new service
+
+```
+USAGE
+  $ tode add:service SERVICE_NAME
+
+ARGUMENTS
+  SERVICE_NAME  Name of service to create
+
+OPTIONS
+  -h, --help  show CLI help
+
+ALIASES
+  $ tode as
+
+EXAMPLE
+  tode add:service service_name
+```
+
+
+## `tode create-project PROJECT NAME`
+
+Scaffolds a fresh Tode project
+
+```
+USAGE
+  $ tode create-project PROJECT NAME
+
+ARGUMENTS
+  PROJECT NAME  Name of project to create
+
+OPTIONS
+  -h, --help  show CLI help
+
+EXAMPLE
+  tode create-project myNewProject
+```
+
+
+## `tode help [COMMAND]`
+
+display help for tode
+
+```
+USAGE
+  $ tode help [COMMAND]
+
+ARGUMENTS
+  COMMAND  command to show help for
+
+OPTIONS
+  --all  see all commands in CLI
+```
+
+<!-- commandsstop -->
 * [`tode create-project <name>`](#tode-create-project-project_name)
 * [`tode add:controller <name>`](#tode-addcontroller-controller_name)
 * [`tode add:model <name>`](#tode-addmodel-model_name)
@@ -145,7 +310,7 @@ export class Example extends BaseModel {
 
 Tode uses [Objection.js](https://vincit.github.io/objection.js/) as the ORM. The models created are objection.js models.  
 **Note: The ```tableName``` property nust be the name of an actual table in your database**.  
-Read more about [**Tode-cli database setup**](#database).
+Read more about [Tode-cli database setup](#database).
 
 ## `tode add:service SERVICE_NAME`
 
