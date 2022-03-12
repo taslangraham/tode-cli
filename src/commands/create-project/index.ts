@@ -35,7 +35,7 @@ export default class CreateProject extends Command {
     Log(chalk.green(`Generating Project - ${chalk.yellow(projectName)} ....`));
 
     const cloneCommand = `git clone ${starterTemplateRepo} --depth 1 --branch ${releaseTag} ${projectName}`;
-    const creation = await shell.exec(cloneCommand, { silent: false, timeout: 1500 });
+    const creation = await shell.exec(cloneCommand, { silent: true, timeout: 1500 });
 
     if (creation.code !== SUCCESS_EXIT_CODE) {
       throw new Error('Failed to create project. Please ensure you have an internet connection.');
