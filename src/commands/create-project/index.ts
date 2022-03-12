@@ -42,13 +42,11 @@ export default class CreateProject extends Command {
     }
 
     shell.exec(`npx rimraf ${projectName}/.git`);
-    shell.cd(`${projectName}/`);
-    shell.cp('.env.example', '.env');
-    shell.exec('npx rimraf .env.example');
 
     Log(chalk.green('Project generated successfully'));
     Log(chalk.green('-------------------------------'));
     Log(`run 'cd ${chalk.yellow(projectName)}' to enter project folder`);
+    Log('Then run "cp .env.example .env".');
   }
 
   public async catch(error: Error) {
