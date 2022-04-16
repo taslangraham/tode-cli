@@ -1,6 +1,6 @@
 {
   "name": "tode-cli",
-  "version": "1.0.4-alpha",
+  "version": "1.0.5-alpha",
   "author": "Taslan Graham",
   "bin": {
     "tode": "bin/run"
@@ -50,7 +50,7 @@
     "/npm-shrinkwrap.json",
     "/oclif.manifest.json"
   ],
-  "homepage": "https://github.com/taslangraham/tode-cli",
+  "homepage": "https://taslangraham.github.io/taslangraham-tode-cli-docs/#/",
   "keywords": [
     "nodejs",
     "tode-cli",
