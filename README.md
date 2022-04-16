@@ -59,7 +59,7 @@ ARGUMENTS
   CONTROLLER  Adds a controller to the application
   MODEL       adds a new Databse Model
   SERVICE     adds a new service
-  RESOURCE    adds a complete resource (mode, controller, service
+  RESOURCE    adds a complete resource (mode, controller, service)
   AUTH        adds JWT authentication
 
 OPTIONS
@@ -126,7 +126,7 @@ EXAMPLE
 
 ## `tode add:resource RESOURCE_NAME`
 
-adds a complete resource (mode, controller, service
+adds a complete resource (mode, controller, service)
 
 ```
 USAGE
