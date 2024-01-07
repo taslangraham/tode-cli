@@ -50,7 +50,7 @@
     "/npm-shrinkwrap.json",
     "/oclif.manifest.json"
   ],
-  "homepage": "https://taslangraham.github.io/taslangraham-tode-cli-docs/#/",
+  "homepage": "https://taslangraham.github.io/tode-cli-docs/#/",
   "keywords": [
     "nodejs",
     "tode-cli",
