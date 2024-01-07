@@ -3,8 +3,8 @@
     "declaration": true,
     "importHelpers": true,
     "module": "commonjs",
-    "outDir": "lib",
-    "rootDir": "src",
+    "outDir": "./lib",
+    "rootDir": "./src",
     "strict": true,
     "target": "es2017",
     "alwaysStrict": true,
@@ -20,4 +20,7 @@
   "include": [
     "src/**/*"
   ],
+  "exclude": [
+    "node_modules/"
+  ]
 }
